@@ -1,0 +1,3 @@
+Q1: Why does the table (buefy) not using v-for for representing the data?
+
+Q2: Why is vue using tag="router-link" and not <navlink>?
