@@ -2,7 +2,7 @@
   <keep-alive>
     <div class="form-center">
       <h1 class="form-title">Wecolme to Concert Ticket Booking 🌏</h1>
-      <form action="">
+      <form>
         <b-field grouped>
           <b-field label="Firstname" expanded>
             <b-input v-model="firstname" id="firstname"></b-input>
@@ -18,7 +18,8 @@
             message="We'll use this for sending you tickets"
             expanded
           >
-            <b-input type="email" value="" maxlength="30"> </b-input>
+            <b-input v-model="email" type="email" value="" maxlength="30">
+            </b-input>
           </b-field>
 
           <b-field label="Select a date" type="is-success" expanded>
@@ -45,6 +46,8 @@
 </template>
 
 <script>
+const axios = require("axios");
+
 export default {
   data() {
     return {
@@ -57,9 +60,20 @@ export default {
   },
   methods: {
     logging: function() {
-      console.log(
-        `FN: ${this.firstname}, LN: ${this.lastname}, Email: ${this.email}, `
-      );
+      axios.post("https://jsdev.api.stdlib.com/practice@dev/Trello", {
+        Firstname: this.firstname,
+        Lastname: this.lastname,
+        email: this.email,
+        Date: this.dateselected
+      });
+      this.success();
+    },
+
+    success: function() {
+      this.$buefy.toast.open({
+        message: "Something happened correctly!",
+        type: "is-success"
+      });
     }
   }
 };
